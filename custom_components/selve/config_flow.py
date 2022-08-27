@@ -14,13 +14,13 @@ from homeassistant.exceptions import HomeAssistantError
 from selve import *
 
 from .const import (DOMAIN)
-from homeassistant.const import (CONF_PORT)
+from homeassistant.const import (CONF_HOST)
 
 _LOGGER = logging.getLogger(__name__)
 
 # TODO adjust the data schema to the data that you need
 data_schema = OrderedDict()
-data_schema[vol.Required(CONF_PORT, default="port")] = str
+data_schema[vol.Required(CONF_HOST, default="127.0.0.1:8000")] = str
 STEP_USER_DATA_SCHEMA = vol.Schema(data_schema)
 
 async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
@@ -38,7 +38,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     
     
     try:
-        gateway = Gateway(data[CONF_PORT])
+        gateway = Gateway(data[CONF_HOST])
     except Exception as e:
         raise ConnectionError
 
@@ -52,7 +52,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     # InvalidAuth
 
     # Return info that you want to store in the config entry.
-    return {CONF_PORT: data[CONF_PORT]}
+    return {CONF_HOST: data[CONF_HOST]}
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -77,7 +77,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             _LOGGER.exception("gateway not ready")
             errors["base"] = "gateway_not_ready"
         except ConnectionError:
-            errors["base"] = "invalid_port"
+            errors["base"] = "invalid_host"
         except Exception:  # pylint: disable=broad-except
             _LOGGER.exception("Unexpected exception")
             errors["base"] = "unknown"

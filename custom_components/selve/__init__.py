@@ -9,12 +9,12 @@ from .const import DOMAIN, SELVE_TYPES
 from collections import defaultdict
 import logging
 import voluptuous as vol
-from homeassistant.const import CONF_PORT
+from homeassistant.const import CONF_HOST
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity
 from selve import Gateway
 
-REQUIREMENTS = ["python-selve-new"]
+REQUIREMENTS = ["python-selve-http"]
 PLATFORMS = ["cover"]#, "switch", "light", "climate"]
 
 _LOGGER = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ CONFIG_SCHEMA = vol.Schema(
     {
         DOMAIN: vol.Schema(
             {
-                vol.Required(CONF_PORT): cv.string,
+                vol.Required(CONF_HOST): cv.string,
             }
         ),
     },
@@ -38,9 +38,9 @@ async def async_setup(hass: HomeAssistant, config: dict):
     # instance that has been created in the UI.
     hass.data.setdefault(DOMAIN, {})
 
-    serial_port = config[DOMAIN][CONF_PORT]
+    host = config[DOMAIN][CONF_HOST]
     try:
-        selve = Gateway(serial_port, False)
+        selve = Gateway(host, False)
     except:
         _LOGGER.exception("Error when trying to connect to the selve gateway")
         return False
