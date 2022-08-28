@@ -1,11 +1,11 @@
 {
     "domain": "selve",
-    "name": "Selve",
+    "name": "Selve HTTP",
     "documentation": "https://home-assistant.io/components/selve/",
-    "issue_tracker": "https://github.com/Kannix2005/homeassistant-selve/issues",
+    "issue_tracker": "https://github.com/gillesmaes/homeassistant-selve-http/issues",
     "dependencies": ["discovery"],
-    "codeowners": ["@Kannix2005"],
-    "requirements": ["python-selve-new==1.0.25"],
+    "codeowners": ["@gillesmaes"],
+    "requirements": ["python-selve-http==1.0.1"],
     "version": "1.0.1",
     "iot_class": "local_polling",
     "config_flow": true

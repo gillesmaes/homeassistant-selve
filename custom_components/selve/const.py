@@ -1,6 +1,6 @@
 """Constants for the selvetest integration."""
 
-DOMAIN = "selve"
+DOMAIN = "selve-http"
 SELVE_TYPES = {
     0: None,
     1: "cover",
