@@ -1,5 +1,5 @@
 {
-    "domain": "selve_http",
+    "domain": "selve-http",
     "name": "Selve HTTP",
     "documentation": "https://home-assistant.io/components/selve/",
     "issue_tracker": "https://github.com/gillesmaes/homeassistant-selve-http/issues",

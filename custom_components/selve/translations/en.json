@@ -1,6 +1,6 @@
 {
     "config": {
-        "title": "Selve NG",
+        "title": "Selve HTTP",
         "step": {
             "user": {
                 "title": "Host setup",
